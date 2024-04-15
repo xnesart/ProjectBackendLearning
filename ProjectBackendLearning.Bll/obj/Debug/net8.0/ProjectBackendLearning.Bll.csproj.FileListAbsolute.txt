@@ -1,0 +1,17 @@
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.Bll.deps.json
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.Bll.dll
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.Bll.pdb
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.Core.dll
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.DataLayer.dll
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.Core.pdb
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/bin/Debug/net8.0/ProjectBackendLearning.DataLayer.pdb
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.csproj.AssemblyReference.cache
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.GeneratedMSBuildEditorConfig.editorconfig
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.AssemblyInfoInputs.cache
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.AssemblyInfo.cs
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.csproj.CoreCompileInputs.cache
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.csproj.CopyComplete
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.dll
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/refint/ProjectBackendLearning.Bll.dll
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ProjectBackendLearning.Bll.pdb
+/Users/homeland/Projects/ProjectBackendLearning/ProjectBackendLearning.Bll/obj/Debug/net8.0/ref/ProjectBackendLearning.Bll.dll

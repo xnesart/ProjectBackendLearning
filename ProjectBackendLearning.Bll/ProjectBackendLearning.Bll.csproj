@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ProjectBackendLearning.Core\ProjectBackendLearning.Core.csproj" />
+      <ProjectReference Include="..\ProjectBackendLearning.DataLayer\ProjectBackendLearning.DataLayer.csproj" />
+    </ItemGroup>
+
+</Project>
