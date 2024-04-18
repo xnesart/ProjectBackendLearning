@@ -4,29 +4,13 @@ namespace ProjectBackendLearning.DataLayer.Repositories;
 
 public class UsersRepository : BaseRepository, IUsersRepository
 {
-    public UsersRepository() : base("")
+    public UsersRepository(MamkinMinerContext context) : base(context)
     {
     }
 
     public List<UserDto> GetUsers()
     {
-        return new List<UserDto>()
-        {
-            new UserDto()
-            {
-                Email = "mailByGod@gmail.com",
-                Id = Guid.NewGuid(),
-                Name = "userJestkiy",
-                Password = "1111"
-            },
-            new UserDto()
-            {
-                Email = "mail228@gmail.com",
-                Id = Guid.NewGuid(),
-                Name = "userNeJestkiy",
-                Password = "2222"
-            },
-        };
+        return _ctx.Users.ToList();
     }
 
     public UserDto GetUserById(Guid id)
@@ -36,7 +20,7 @@ public class UsersRepository : BaseRepository, IUsersRepository
             Id = id,
             Email = "some@mail.com",
             Password = "somepassword",
-            Name = "userZver"
+            UserName = "userZver"
         };
     }
 }
