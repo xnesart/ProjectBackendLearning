@@ -23,7 +23,7 @@ public class UsersService:IUsersService
         return _usersRepository.GetUserById(id);
     }
 
-    public void DeteleUserById(Guid id)
+    public void DeleteUserById(Guid id)
     {
         var user = _usersRepository.GetUserById(id);
         if (user is null)

@@ -18,9 +18,9 @@ public class UsersController : Controller
     }
 
     [HttpGet("getUsers")]
-    public List<UserDto> GetUsers()
+    public ActionResult<List<UserDto>> GetUsers()
     {
-        return _usersService.GetUsers();
+        return Ok(_usersService.GetUsers());
     }
 
     [HttpGet("{id}")]
@@ -46,7 +46,7 @@ public class UsersController : Controller
     {
         try
         {
-            _usersService.DeteleUserById(id);
+            _usersService.DeleteUserById(id);
         }
         catch (Exception ex)
         {
