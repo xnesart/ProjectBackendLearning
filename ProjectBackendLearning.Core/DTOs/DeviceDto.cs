@@ -1,6 +1,6 @@
-using ClassLibrary1ProjectBackendLearning.Core.Enums;
+using ProjectBackendLearning.Core.Enums;
 
-namespace ClassLibrary1ProjectBackendLearning.Core.DTOs;
+namespace ProjectBackendLearning.Core.DTOs;
 
 public class DeviceDto:IdContainer
 {

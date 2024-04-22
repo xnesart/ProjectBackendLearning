@@ -1,4 +1,4 @@
-namespace ClassLibrary1ProjectBackendLearning.Core.DTOs;
+namespace ProjectBackendLearning.Core.DTOs;
 
 public class UserDto : IdContainer
 {

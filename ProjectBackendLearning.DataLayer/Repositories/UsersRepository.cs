@@ -1,4 +1,4 @@
-using ClassLibrary1ProjectBackendLearning.Core.DTOs;
+using ProjectBackendLearning.Core.DTOs;
 
 namespace ProjectBackendLearning.DataLayer.Repositories;
 
@@ -8,6 +8,14 @@ public class UsersRepository : BaseRepository, IUsersRepository
     {
     }
 
+    public Guid CreateUser(UserDto user)
+    {
+        _ctx.Users.Add(user);
+        _ctx.SaveChanges();
+        
+        return user.Id;
+    }
+    
     public List<UserDto> GetUsers()
     {
         return _ctx.Users.ToList();

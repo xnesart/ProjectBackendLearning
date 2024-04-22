@@ -1,6 +1,6 @@
-using ClassLibrary1ProjectBackendLearning.Core.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using ProjectBackendLearning.Bll.Services;
+using ProjectBackendLearning.Core.DTOs;
 
 namespace ProjectBackendLearning.Controllers;
 
@@ -29,10 +29,15 @@ public class UsersController : Controller
         return _usersService.GetUserById(Guid.NewGuid());
     }
 
-    [HttpPost]
-    public Guid CreateUser(object request)
+    [HttpPost("create")]
+    public ActionResult<Guid> CreateUser(string name, string email, string password, int age)
     {
-        return Guid.NewGuid();
+        if (name != null && email != null && password != null)
+        {
+            return Ok(_usersService.CreateUser(name, email, password, age));
+        }
+
+        return BadRequest();
     }
 
     [HttpPut("{id}")]

@@ -1,4 +1,4 @@
-namespace ClassLibrary1ProjectBackendLearning.Core.Exceptions;
+namespace ProjectBackendLearning.Core.Exceptions;
 
 public class NotFoundException : Exception
 {

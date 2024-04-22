@@ -1,4 +1,4 @@
-using ClassLibrary1ProjectBackendLearning.Core.DTOs;
+using ProjectBackendLearning.Core.DTOs;
 using ProjectBackendLearning.DataLayer.Repositories;
 
 namespace ProjectBackendLearning.Bll.Services;

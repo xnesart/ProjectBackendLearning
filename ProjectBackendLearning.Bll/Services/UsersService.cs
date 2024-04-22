@@ -1,5 +1,5 @@
-using ClassLibrary1ProjectBackendLearning.Core.DTOs;
-using ClassLibrary1ProjectBackendLearning.Core.Exceptions;
+using ProjectBackendLearning.Core.DTOs;
+using ProjectBackendLearning.Core.Exceptions;
 using ProjectBackendLearning.DataLayer.Repositories;
 
 namespace ProjectBackendLearning.Bll.Services;
@@ -13,6 +13,20 @@ public class UsersService:IUsersService
         _usersRepository = usersRepository;
     }
 
+    public Guid CreateUser(string name, string email, string password, int age)
+    {
+        UserDto user = new UserDto()
+        {
+            Age = age,
+            Email = email,
+            Devices = new List<DeviceDto>(),
+            Password = password,
+            UserName = name,
+            Id = Guid.NewGuid()
+        };
+        
+       return _usersRepository.CreateUser(user);
+    }
     public List<UserDto> GetUsers()
     {
         return _usersRepository.GetUsers();

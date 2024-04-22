@@ -1,4 +1,4 @@
-namespace ClassLibrary1ProjectBackendLearning.Core.Enums;
+namespace ProjectBackendLearning.Core.Enums;
 
 public enum DeviceType
 {

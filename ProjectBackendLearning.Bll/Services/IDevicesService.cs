@@ -1,4 +1,4 @@
-using ClassLibrary1ProjectBackendLearning.Core.DTOs;
+using ProjectBackendLearning.Core.DTOs;
 
 namespace ProjectBackendLearning.Bll.Services;
 
