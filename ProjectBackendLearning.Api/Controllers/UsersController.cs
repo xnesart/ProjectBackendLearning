@@ -26,13 +26,13 @@ public class UsersController : Controller
     [HttpGet("{id}")]
     public UserDto GetUserById(Guid id)
     {
-        return _usersService.GetUserById(Guid.NewGuid());
+        return _usersService.GetUserById(id);
     }
 
     [HttpPost("create")]
     public ActionResult<Guid> CreateUser(string name, string email, string password, int age)
     {
-        if (name != null && email != null && password != null)
+        if (name != null && email != null && password != null && age != null)
         {
             return Ok(_usersService.CreateUser(name, email, password, age));
         }
@@ -41,29 +41,56 @@ public class UsersController : Controller
     }
 
     [HttpPut("{id}")]
-    public ActionResult UpdateUser([FromRoute] Guid id, [FromBody] object request)
+    public ActionResult UpdateUser([FromRoute] Guid id, string name, string email, string password, int age)
     {
-        return NoContent();
+        var user = _usersService.GetUserById(id);
+        
+        if (user is null) 
+        {
+            return NoContent();
+        }
+
+        if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(email) &&
+            string.IsNullOrEmpty(password) && age == null)
+        {
+            return BadRequest();
+        }
+        
+        if (!string.IsNullOrEmpty(name))
+        {
+            user.UserName = name;
+        }
+
+        if (!string.IsNullOrEmpty(email))
+        {
+            user.Email = email;
+        }
+
+        if (!string.IsNullOrEmpty(password))
+        {
+            user.Password = password;
+        }
+
+        if (age != null)
+        {
+            user.Age = age;
+        }
+        
+        _usersService.UpdateUser(user);
+        
+        return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     public ActionResult DeleteUserById(Guid id)
     {
-        try
-        {
-            _usersService.DeleteUserById(id);
-        }
-        catch (Exception ex)
-        {
-            return NotFound(ex.Message);
-        }
-
-        return NoContent();
+        _usersService.DeleteUserById(id);
+        
+        return Ok();
     }
-
-    //api users/42/devices
+    
     [HttpGet("{userId}/devices")]
-    public DeviceDto GetDeviceByUserId(Guid id)
+    public DeviceDto GetDeviceByUserId(Guid userId)
     {
         return _devicesService.GetDeviceByUserId(Guid.NewGuid());
     }

@@ -4,7 +4,7 @@ using ProjectBackendLearning.DataLayer.Repositories;
 
 namespace ProjectBackendLearning.Bll.Services;
 
-public class UsersService:IUsersService
+public class UsersService : IUsersService
 {
     private readonly IUsersRepository _usersRepository;
 
@@ -24,9 +24,15 @@ public class UsersService:IUsersService
             UserName = name,
             Id = Guid.NewGuid()
         };
-        
-       return _usersRepository.CreateUser(user);
+
+        return _usersRepository.CreateUser(user);
     }
+
+    public Guid UpdateUser(UserDto user)
+    {
+        return new Guid();
+    }
+
     public List<UserDto> GetUsers()
     {
         return _usersRepository.GetUsers();
@@ -40,13 +46,12 @@ public class UsersService:IUsersService
     public void DeleteUserById(Guid id)
     {
         var user = _usersRepository.GetUserById(id);
+        
         if (user is null)
         {
             throw new NotFoundException($"Юзер с id {id} не найден");
         }
-        else
-        {
-            
-        }
+
+        _usersRepository.DeleteUser(user);
     }
 }

@@ -15,7 +15,13 @@ public class UsersRepository : BaseRepository, IUsersRepository
         
         return user.Id;
     }
-    
+
+    public void DeleteUser(UserDto user)
+    {
+        _ctx.Users.Remove(user);
+        _ctx.SaveChanges();
+    }
+
     public List<UserDto> GetUsers()
     {
         return _ctx.Users.ToList();
