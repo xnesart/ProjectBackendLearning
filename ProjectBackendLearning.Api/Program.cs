@@ -1,7 +1,5 @@
 using ProjectBackendLearning.Bll;
-using ProjectBackendLearning.Bll.Services;
 using ProjectBackendLearning.DataLayer;
-using ProjectBackendLearning.DataLayer.Repositories;
 using ProjectBackendLearning.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
