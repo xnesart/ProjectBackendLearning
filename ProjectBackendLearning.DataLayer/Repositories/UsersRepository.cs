@@ -13,14 +13,5 @@ public class UsersRepository : BaseRepository, IUsersRepository
         return _ctx.Users.ToList();
     }
 
-    public UserDto GetUserById(Guid id)
-    {
-        return new()
-        {
-            Id = id,
-            Email = "some@mail.com",
-            Password = "somepassword",
-            UserName = "userZver"
-        };
-    }
+    public UserDto GetUserById(Guid id) => _ctx.Users.FirstOrDefault(u => u.Id == id);
 }

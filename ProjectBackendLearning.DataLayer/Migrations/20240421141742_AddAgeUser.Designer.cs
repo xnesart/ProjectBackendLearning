@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectBackendLearning.DataLayer;
@@ -11,9 +12,11 @@ using ProjectBackendLearning.DataLayer;
 namespace ProjectBackendLearning.DataLayer.Migrations
 {
     [DbContext(typeof(MamkinMinerContext))]
-    partial class MamkinMinerContextModelSnapshot : ModelSnapshot
+    [Migration("20240421141742_AddAgeUser")]
+    partial class AddAgeUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
