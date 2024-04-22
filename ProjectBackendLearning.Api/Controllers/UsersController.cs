@@ -32,7 +32,7 @@ public class UsersController : Controller
     [HttpPost("create")]
     public ActionResult<Guid> CreateUser(string name, string email, string password, int age)
     {
-        if (name != null && email != null && password != null && age != null)
+        if (name != null && email != null && password != null && age > 0)
         {
             return Ok(_usersService.CreateUser(name, email, password, age));
         }
@@ -41,7 +41,7 @@ public class UsersController : Controller
     }
 
     [HttpPut("{id}")]
-    public ActionResult UpdateUser([FromRoute] Guid id, string name, string email, string password, int age)
+    public ActionResult<Guid> UpdateUser(Guid id, string name, string email, string password, int age)
     {
         var user = _usersService.GetUserById(id);
         
@@ -51,7 +51,7 @@ public class UsersController : Controller
         }
 
         if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(email) &&
-            string.IsNullOrEmpty(password) && age == null)
+            string.IsNullOrEmpty(password) && age > 0)
         {
             return BadRequest();
         }
@@ -71,14 +71,12 @@ public class UsersController : Controller
             user.Password = password;
         }
 
-        if (age != null)
+        if (age > 0)
         {
             user.Age = age;
         }
         
-        _usersService.UpdateUser(user);
-        
-        return Ok();
+        return Ok(_usersService.UpdateUser(user));
     }
 
     [HttpDelete("{id:guid}")]

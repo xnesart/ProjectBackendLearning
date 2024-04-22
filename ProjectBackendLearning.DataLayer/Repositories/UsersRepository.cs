@@ -22,6 +22,14 @@ public class UsersRepository : BaseRepository, IUsersRepository
         _ctx.SaveChanges();
     }
 
+    public Guid UpdateUser(UserDto user)
+    {
+        _ctx.Users.Update(user);
+        _ctx.SaveChanges();
+        
+        return user.Id;
+    }
+
     public List<UserDto> GetUsers()
     {
         return _ctx.Users.ToList();

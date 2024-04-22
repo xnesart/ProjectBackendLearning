@@ -30,7 +30,7 @@ public class UsersService : IUsersService
 
     public Guid UpdateUser(UserDto user)
     {
-        return new Guid();
+        return _usersRepository.UpdateUser(user);
     }
 
     public List<UserDto> GetUsers()
