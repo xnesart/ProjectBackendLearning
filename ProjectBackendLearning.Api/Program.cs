@@ -1,56 +1,54 @@
-using System.Net;
-using Microsoft.AspNetCore.Diagnostics;
 using ProjectBackendLearning.Bll;
-using ProjectBackendLearning.Core.Exceptions;
+using ProjectBackendLearning.Configuration;
 using ProjectBackendLearning.DataLayer;
 using ProjectBackendLearning.Extensions;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Logging.ClearProviders();
 
+    Log.Logger = new LoggerConfiguration()
+        .ReadFrom.Configuration(builder.Configuration)
+        .CreateLogger();
 // Add services to the container.
 
-builder.Services.ConfigureApiServices();
-builder.Services.ConfigureBllServices();
-builder.Services.ConfigureDataBase(builder.Configuration);
-builder.Services.ConfigureDalServices();
+    builder.Services.ConfigureApiServices();
+    builder.Services.ConfigureBllServices();
+    builder.Services.ConfigureDataBase(builder.Configuration);
+    builder.Services.ConfigureDalServices();
 
-var app = builder.Build();
+    builder.Host.UseSerilog();
+    var app = builder.Build();
+
+    app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/error");
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseSerilogRequestLogging();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+    
+    Log.Information("Running app");
+    app.Run();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.UseExceptionHandler(errorApp =>
+catch (Exception ex)
 {
-    errorApp.Run(async context =>
-    {
-        var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
-        if (exceptionHandlerFeature != null)
-        {
-            var exception = exceptionHandlerFeature.Error;
-
-            if (exception is NotFoundException notFoundException)
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                await context.Response.WriteAsJsonAsync(new { error = notFoundException.Message });
-            }
-            else
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                await context.Response.WriteAsJsonAsync(new { error = "Внутренняя ошибка сервера" });
-            }
-        }
-    });
-});
-
-app.Run();
+    Log.Fatal(ex.Message);
+}
+finally
+{
+    Log.Information("App stopped");
+    Log.CloseAndFlush();
+}

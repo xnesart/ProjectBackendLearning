@@ -55,3 +55,5 @@ msbuild.wrn
 ProjectBackendLearning.Api/appsettings.Development.json
 
 ProjectBackendLearning.Api/appsettings.json
+
+logs/

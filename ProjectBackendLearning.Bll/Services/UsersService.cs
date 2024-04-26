@@ -1,30 +1,29 @@
 using ProjectBackendLearning.Core.DTOs;
 using ProjectBackendLearning.Core.Exceptions;
 using ProjectBackendLearning.DataLayer.Repositories;
+using Serilog;
 
 namespace ProjectBackendLearning.Bll.Services;
 
 public class UsersService : IUsersService
 {
     private readonly IUsersRepository _usersRepository;
+    private readonly ILogger _logger = Log.ForContext<UsersService>();
+
 
     public UsersService(IUsersRepository usersRepository)
     {
         _usersRepository = usersRepository;
     }
 
-    public Guid CreateUser(string name, string email, string password, int age)
+    public Guid CreateUser(UserDto user)
     {
-        UserDto user = new UserDto()
+        user.Id = Guid.NewGuid();
+        if (user.Age < 18 || user.Age > 200)
         {
-            Age = age,
-            Email = email,
-            Devices = new List<DeviceDto>(),
-            Password = password,
-            UserName = name,
-            Id = Guid.NewGuid()
-        };
-
+            throw new ValidationException("Возраст указан неверно");
+        }
+        
         return _usersRepository.CreateUser(user);
     }
 
@@ -35,6 +34,7 @@ public class UsersService : IUsersService
 
     public List<UserDto> GetUsers()
     {
+        _logger.Information("Зовем метод репозитория");
         return _usersRepository.GetUsers();
     }
 

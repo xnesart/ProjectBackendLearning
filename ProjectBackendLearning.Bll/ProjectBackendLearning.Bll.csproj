@@ -11,4 +11,8 @@
       <ProjectReference Include="..\ProjectBackendLearning.DataLayer\ProjectBackendLearning.DataLayer.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Serilog" Version="3.1.1" />
+    </ItemGroup>
+
 </Project>

@@ -1,9 +1,12 @@
 using ProjectBackendLearning.Core.DTOs;
+using Serilog;
 
 namespace ProjectBackendLearning.DataLayer.Repositories;
 
 public class UsersRepository : BaseRepository, IUsersRepository
 {
+    private readonly ILogger _logger = Log.ForContext<UsersRepository>();
+
     public UsersRepository(MamkinMinerContext context) : base(context)
     {
     }
@@ -32,6 +35,7 @@ public class UsersRepository : BaseRepository, IUsersRepository
 
     public List<UserDto> GetUsers()
     {
+        _logger.Information("Идем в базу данных запрашивать список всех пользователей");
         return _ctx.Users.ToList();
     }
 
