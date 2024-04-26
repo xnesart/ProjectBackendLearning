@@ -7,7 +7,7 @@ public static class DataBaseExtensions
 {
     public static void ConfigureDataBase(this IServiceCollection services, ConfigurationManager configurationManager)
     {
-        services.AddDbContext<MamkinMinerContext>(
+        services.AddDbContext<BackMinerContext>(
             options => options
                 .UseNpgsql(configurationManager.GetConnectionString("MypConnection"))
                 .UseSnakeCaseNamingConvention());

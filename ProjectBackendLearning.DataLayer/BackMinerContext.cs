@@ -3,12 +3,12 @@ using ProjectBackendLearning.Core.DTOs;
 
 namespace ProjectBackendLearning.DataLayer;
 
-public class MamkinMinerContext : DbContext
+public class BackMinerContext : DbContext
 {
     public DbSet<UserDto> Users { get; set; }
     public DbSet<DeviceDto> Devices { get; set; }
 
-    public MamkinMinerContext(DbContextOptions<MamkinMinerContext> options) : base(options)
+    public BackMinerContext(DbContextOptions<BackMinerContext> options) : base(options)
     {
     }
 

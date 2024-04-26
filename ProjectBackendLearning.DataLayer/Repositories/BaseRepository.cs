@@ -2,9 +2,9 @@ namespace ProjectBackendLearning.DataLayer.Repositories;
 
 public class BaseRepository
 {
-    protected readonly MamkinMinerContext _ctx;
+    protected readonly BackMinerContext _ctx;
 
-    public BaseRepository(MamkinMinerContext context)
+    public BaseRepository(BackMinerContext context)
     {
         _ctx = context;
     }

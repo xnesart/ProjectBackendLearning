@@ -11,7 +11,7 @@ using ProjectBackendLearning.DataLayer;
 
 namespace ProjectBackendLearning.DataLayer.Migrations
 {
-    [DbContext(typeof(MamkinMinerContext))]
+    [DbContext(typeof(BackMinerContext))]
     [Migration("20240421141742_AddAgeUser")]
     partial class AddAgeUser
     {
