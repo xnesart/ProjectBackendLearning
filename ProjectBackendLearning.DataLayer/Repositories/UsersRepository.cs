@@ -7,7 +7,7 @@ public class UsersRepository : BaseRepository, IUsersRepository
 {
     private readonly ILogger _logger = Log.ForContext<UsersRepository>();
 
-    public UsersRepository(MamkinMinerContext context) : base(context)
+    public UsersRepository(BackMinerContext context) : base(context)
     {
     }
 

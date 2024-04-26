@@ -10,7 +10,7 @@ using ProjectBackendLearning.DataLayer;
 
 namespace ProjectBackendLearning.DataLayer.Migrations
 {
-    [DbContext(typeof(MamkinMinerContext))]
+    [DbContext(typeof(BackMinerContext))]
     partial class MamkinMinerContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

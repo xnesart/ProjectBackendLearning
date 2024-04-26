@@ -5,7 +5,7 @@ namespace ProjectBackendLearning.DataLayer.Repositories;
 
 public class DevicesRepository : BaseRepository, IDevicesRepository
 {
-    public DevicesRepository(MamkinMinerContext context) : base(context)
+    public DevicesRepository(BackMinerContext context) : base(context)
     {
     }
 
