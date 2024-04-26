@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -20,11 +21,13 @@ public class UsersController : Controller
     private readonly IUsersService _usersService;
     private readonly IDevicesService _devicesService;
     private readonly Serilog.ILogger _logger = Log.ForContext<UsersController>();
+    private readonly IMapper _mapper;
 
-    public UsersController(IUsersService usersService, IDevicesService devicesService)
+    public UsersController(IUsersService usersService, IDevicesService devicesService, IMapper mapper)
     {
         _usersService = usersService;
         _devicesService = devicesService;
+        _mapper = mapper;
     }
     
     [Authorize]
@@ -57,8 +60,9 @@ public class UsersController : Controller
         _logger.Debug($"Запрос создать пользователя с параметрами: {request.UserName} {request.Age} {request.Email}");
         if (request.UserName != null && request.Password != null && request.Age != null && request.Email != null)
         {
-            UserDto user = new UserDto()
-                { Age = request.Age, Email = request.Email, Password = request.Password, UserName = request.UserName };
+            // UserDto user = new UserDto()
+            //     { Age = request.Age, Email = request.Email, Password = request.Password, UserName = request.UserName };
+            var user = _mapper.Map<UserDto>(request);
             return Ok(_usersService.CreateUser(user));
         }
 
