@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace ProjectBackendLearning.Models.Responses;
+namespace ProjectBackendLearning.Core.Models.Responses;
 
 public class ResponseMapperProfile : Profile
 {

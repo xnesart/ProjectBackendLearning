@@ -1,4 +1,4 @@
-namespace ProjectBackendLearning.Models.Responses;
+namespace ProjectBackendLearning.Core.Models.Responses;
 
 public class UserWithDevicesResponse:UserResponse
 {

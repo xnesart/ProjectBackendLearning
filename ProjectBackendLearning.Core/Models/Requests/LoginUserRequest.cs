@@ -1,4 +1,4 @@
-namespace ProjectBackendLearning.Models.Requests;
+namespace ProjectBackendLearning.Core.Models.Requests;
 
 public class LoginUserRequest
 {

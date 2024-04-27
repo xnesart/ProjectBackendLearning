@@ -2,9 +2,10 @@ using ProjectBackendLearning.Bll;
 using ProjectBackendLearning.Configuration;
 using ProjectBackendLearning.DataLayer;
 using ProjectBackendLearning.Extensions;
-using ProjectBackendLearning.Models.Requests;
-using ProjectBackendLearning.Models.Responses;
+using ProjectBackendLearning.Core.Models.Requests;
 using Serilog;
+using ProjectBackendLearning.Core.Models.Responses;
+
 
 try
 {
@@ -16,10 +17,13 @@ try
         .CreateLogger();
 // Add services to the container.
 
+    // builder.Services.AddFluentValidationAutoValidation()
+    //     .AddFluentValidationClientsideAdapters()
+    //     .AddValidatorsFromAssemblyContaining<UserRequestValidator>();
     builder.Services.ConfigureApiServices(builder.Configuration);
     builder.Services.ConfigureBllServices();
     builder.Services.ConfigureDalServices();
-    builder.Services.AddAutoMapper(typeof(RequestMapperProfile),typeof(ResponseMapperProfile));
+    builder.Services.AddAutoMapper(typeof(RequestMapperProfile), typeof(ResponseMapperProfile));
 
     builder.Host.UseSerilog();
     var app = builder.Build();
@@ -41,7 +45,7 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
-    
+
     Log.Information("Running app");
     app.Run();
 }

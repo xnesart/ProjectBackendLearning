@@ -1,7 +1,7 @@
 using AutoMapper;
 using ProjectBackendLearning.Core.DTOs;
 
-namespace ProjectBackendLearning.Models.Requests;
+namespace ProjectBackendLearning.Core.Models.Requests;
 
 public class RequestMapperProfile:Profile
 {
