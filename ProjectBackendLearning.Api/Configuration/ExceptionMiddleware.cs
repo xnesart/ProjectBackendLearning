@@ -24,6 +24,11 @@ public class ExceptionMiddleware
         {
             _logger.Error($"Ошибка валидации {ex.Message}");
             await HandleValidationExceptionAsync(httpContext, ex);
+        }  
+        catch (NotFoundException ex)
+        {
+            _logger.Error($"Ошибка {ex.Message}");
+            await HandleNotFoundExceptionAsync(httpContext, ex);
         }
         catch (Exception ex)
         {
@@ -36,6 +41,17 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+
+        await context.Response.WriteAsync(new ErrorDetails()
+        {
+            StatusCode = context.Response.StatusCode,
+            Message = exception.Message
+        }.ToString());
+    }   
+    private async Task HandleNotFoundExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
         await context.Response.WriteAsync(new ErrorDetails()
         {

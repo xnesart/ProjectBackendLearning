@@ -1,6 +1,6 @@
 using ProjectBackendLearning.Core.Enums;
 
-namespace ProjectBackendLearning.Models.Responses;
+namespace ProjectBackendLearning.Core.Models.Responses;
 
 public class DeviceResponse
 {
