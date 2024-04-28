@@ -17,9 +17,6 @@ try
         .CreateLogger();
 // Add services to the container.
 
-    // builder.Services.AddFluentValidationAutoValidation()
-    //     .AddFluentValidationClientsideAdapters()
-    //     .AddValidatorsFromAssemblyContaining<UserRequestValidator>();
     builder.Services.ConfigureApiServices(builder.Configuration);
     builder.Services.ConfigureBllServices();
     builder.Services.ConfigureDalServices();

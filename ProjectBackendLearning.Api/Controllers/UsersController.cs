@@ -1,10 +1,5 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using ProjectBackendLearning.Bll.Services;
 using ProjectBackendLearning.Core.DTOs;
 using ProjectBackendLearning.Core.Models.Requests;
@@ -61,29 +56,17 @@ public class UsersController : Controller
     }
 
     [HttpPost("login")]
-    public ActionResult<AuthenticationResponse> Login([FromBody] LoginUserRequest user)
+    public ActionResult<AuthenticationResponse> Login([FromBody] LoginUserRequest request)
     {
-        if (user is null)
+        _logger.Debug($"Запрос авторизации пользователя с параметрами: {request.UserName}");
+
+        if (request is null)
         {
             return BadRequest("Invalid client request");
         }
 
-        if (user.UserName == "johndoe" && user.Password == "def@123")
-        {
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345fffffa43534534523dsf"));
-            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-            var tokenOptions = new JwtSecurityToken(
-                issuer: "ProjectBackendLearning",
-                audience: "UI",
-                claims: new List<Claim>(),
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: signinCredentials
-            );
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return Ok(new AuthenticationResponse { Token = tokenString });
-        }
-
-        return Unauthorized();
+        return Ok(_usersService.Login(request));
+        
     }
 
     [HttpPut]

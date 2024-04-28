@@ -24,6 +24,11 @@ public class ExceptionMiddleware
         {
             _logger.Error($"Ошибка валидации {ex.Message}");
             await HandleValidationExceptionAsync(httpContext, ex);
+        }   
+        catch (AuthenticationException ex)
+        {
+            _logger.Error($"Ошибка аутентификации {ex.Message}");
+            await HandleAuthenticationExceptionAsync(httpContext, ex);
         }  
         catch (NotFoundException ex)
         {
@@ -41,6 +46,17 @@ public class ExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+
+        await context.Response.WriteAsync(new ErrorDetails()
+        {
+            StatusCode = context.Response.StatusCode,
+            Message = exception.Message
+        }.ToString());
+    } 
+    private async Task HandleAuthenticationExceptionAsync(HttpContext context, Exception exception)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
 
         await context.Response.WriteAsync(new ErrorDetails()
         {

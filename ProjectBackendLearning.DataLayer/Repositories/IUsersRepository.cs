@@ -10,4 +10,5 @@ public interface IUsersRepository
     public Guid CreateUser(UserDto user);
     public void DeleteUser(UserDto user);
     public Guid UpdateUser(UserDto user);
+    public UserDto GetUserByUserName(string name);
 }
