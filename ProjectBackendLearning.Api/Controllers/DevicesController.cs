@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectBackendLearning.Bll.Services;
 using ProjectBackendLearning.Core.DTOs;
+using ProjectBackendLearning.Core.Models.Requests;
 
 namespace ProjectBackendLearning.Controllers;
 
@@ -24,6 +25,14 @@ public class DevicesController : Controller
         }
 
         return Ok(_devicesService.GetDeviceById(id));
+    }
+    
+    [HttpPost("{userId}")]
+    public ActionResult AddDeviceToUser(Guid userId, [FromBody] AddDeviceToUserRequest request)
+    {
+        _devicesService.AddDeviceToUser(userId, request);
+        
+        return Ok();
     }
 
     [HttpGet()]

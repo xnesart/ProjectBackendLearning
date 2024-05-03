@@ -53,6 +53,7 @@ public class ExceptionMiddleware
             Message = exception.Message
         }.ToString());
     } 
+    
     private async Task HandleAuthenticationExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";
@@ -64,6 +65,7 @@ public class ExceptionMiddleware
             Message = exception.Message
         }.ToString());
     }   
+    
     private async Task HandleNotFoundExceptionAsync(HttpContext context, Exception exception)
     {
         context.Response.ContentType = "application/json";

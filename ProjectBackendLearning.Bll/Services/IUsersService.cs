@@ -11,5 +11,6 @@ public interface IUsersService
     public void DeleteUserById(Guid id);
     public Guid CreateUser(CreateUserRequest request);
     public Guid UpdateUser(UpdateUserRequest request);
+    public void UpdateUser(UserDto user);
     public AuthenticationResponse Login(LoginUserRequest request);
 }

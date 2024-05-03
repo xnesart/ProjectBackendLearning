@@ -8,5 +8,6 @@ public class RequestMapperProfile:Profile
     public RequestMapperProfile()
     {
         CreateMap<CreateUserRequest, UserDto>();
+        CreateMap<AddDeviceToUserRequest, DeviceDto>();
     }
 }

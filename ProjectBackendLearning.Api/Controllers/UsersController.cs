@@ -16,7 +16,6 @@ public class UsersController : Controller
     private readonly IDevicesService _devicesService;
     private readonly Serilog.ILogger _logger = Log.ForContext<UsersController>();
 
-
     public UsersController(IUsersService usersService, IDevicesService devicesService)
     {
         _usersService = usersService;
@@ -28,6 +27,7 @@ public class UsersController : Controller
     public ActionResult<List<UserDto>> GetUsers()
     {
         _logger.Information("Получаем список всех пользователей");
+        
         return Ok(_usersService.GetUsers());
     }
 
@@ -44,6 +44,7 @@ public class UsersController : Controller
             Email = user.Email,
             UserName = user.UserName
         };
+        
         return Ok(userForReturn);
     }
 
@@ -66,7 +67,6 @@ public class UsersController : Controller
         }
 
         return Ok(_usersService.Login(request));
-        
     }
 
     [HttpPut]

@@ -24,7 +24,6 @@ public class UsersService : IUsersService
     private const string _pepper = "son";
     private const int _iteration = 3;
 
-
     public UsersService(IUsersRepository usersRepository, IMapper mapper, IValidator<CreateUserRequest> userValidator,
         IValidator<UpdateUserRequest> userUpdateValidator)
     {
@@ -57,6 +56,7 @@ public class UsersService : IUsersService
         var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
         _logger.Debug($"Выдаем токен пользователю: {request.UserName}");
+
         return new AuthenticationResponse { Token = tokenString };
     }
 
@@ -75,10 +75,11 @@ public class UsersService : IUsersService
     public Guid CreateUser(CreateUserRequest request)
     {
         var validationResult = _userValidator.Validate(request);
+
         if (validationResult.IsValid)
         {
             var user = _mapper.Map<UserDto>(request);
-            user.Id = Guid.NewGuid();
+            // user.Id = Guid.NewGuid();
             user.PasswordSalt = PasswordHasher.GenerateSalt();
             user.PasswordHash = PasswordHasher.ComputeHash(request.Password, user.PasswordSalt, _pepper, _iteration);
 
@@ -86,33 +87,42 @@ public class UsersService : IUsersService
         }
 
         string exceptions = string.Join(Environment.NewLine, validationResult.Errors);
+
         throw new ValidationException(exceptions);
     }
 
     public Guid UpdateUser(UpdateUserRequest request)
     {
         var validationResult = _userUpdateValidator.Validate(request);
+
         if (validationResult.IsValid)
         {
             var user = _usersRepository.GetUserById(request.Id);
 
             if (user == null)
             {
-                _logger.Debug($"Пользователь не найден: {request.UserName}");
+                _logger.Error($"Пользователь не найден: {request.UserName}");
                 throw new NotFoundException("Пользователь не найден");
             }
-            
-            user.Age = request.Age;
-            user.UserName = request.UserName;
-            user.Email = request.Email;
-            
-            _logger.Debug($"Идем в репозиторий обновлять пользователя: {request.UserName}");
-            return _usersRepository.UpdateUser(user);
 
+            user.Age = request.Age;
+            //user.UserName = request.UserName;
+            user.Email = request.Email;
+
+            _logger.Information($"Идем в репозиторий обновлять пользователя: {request.UserName}");
+
+            return _usersRepository.UpdateUser(user);
         }
 
         string exceptions = string.Join(Environment.NewLine, validationResult.Errors);
         throw new ValidationException(exceptions);
+    }
+
+    public void UpdateUser(UserDto user)
+    {
+        _logger.Information($"Идем в репозиторий обновлять пользователя с девайсом: {user.UserName}");
+
+        _usersRepository.UpdateUser(user);
     }
 
     public List<UserDto> GetUsers()
