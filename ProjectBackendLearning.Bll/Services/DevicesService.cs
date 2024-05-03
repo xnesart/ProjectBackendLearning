@@ -34,7 +34,17 @@ public class DevicesService : IDevicesService
         DeviceDto device = _mapper.Map<DeviceDto>(request);
         device.Id = Guid.NewGuid();
         device.Owner = user;
-        
+
         _devicesRepository.AddDeviceToUser(device);
+    }
+
+    public void SetDeviceStatus(Guid deviceId, bool value)
+    {
+        var device = GetDeviceById(deviceId);
+        if (device is null) throw new NotFoundException($"девайс с id {deviceId} не найден");
+
+        device.Status = value;
+        
+        _devicesRepository.SetDeviceStatus(device);
     }
 }

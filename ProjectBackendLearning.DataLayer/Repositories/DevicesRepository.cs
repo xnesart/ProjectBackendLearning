@@ -15,6 +15,11 @@ public class DevicesRepository : BaseRepository, IDevicesRepository
         _ctx.SaveChanges();
     }
 
+    public void SetDeviceStatus(DeviceDto device)
+    {
+        _ctx.Devices.Update(device);
+        _ctx.SaveChanges();
+    }
     public DeviceDto GetDeviceById(Guid id) => _ctx.Devices.FirstOrDefault(d => d.Id == id);
     public DeviceDto GetDeviceByUserId(Guid userId) => _ctx.Devices.FirstOrDefault(d => d.Owner.Id == userId);
 }

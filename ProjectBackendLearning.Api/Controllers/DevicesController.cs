@@ -26,12 +26,20 @@ public class DevicesController : Controller
 
         return Ok(_devicesService.GetDeviceById(id));
     }
-    
+
+    [HttpPost]
+    public IActionResult SetDeviceStatus([FromBody] Guid deviceId, bool value)
+    {
+        _devicesService.SetDeviceStatus(deviceId, value);
+        
+        return Ok();
+    }
+
     [HttpPost("{userId}")]
     public ActionResult AddDeviceToUser(Guid userId, [FromBody] AddDeviceToUserRequest request)
     {
         _devicesService.AddDeviceToUser(userId, request);
-        
+
         return Ok();
     }
 
