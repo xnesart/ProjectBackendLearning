@@ -27,15 +27,21 @@ public class DevicesController : Controller
         return Ok(_devicesService.GetDeviceById(id));
     }
 
-    [HttpPost]
-    public IActionResult SetDeviceStatus([FromBody] Guid deviceId, bool value)
+    [HttpGet("with-status")]
+    public ActionResult<List<DeviceDto>> GetDevicesWithStatus()
+    {
+        return Ok(_devicesService.GetDevicesWithStatus());
+    }
+
+    [HttpPatch("{deviceId}/status")]
+    public IActionResult SetDeviceStatus([FromRoute] Guid deviceId, bool value)
     {
         _devicesService.SetDeviceStatus(deviceId, value);
-        
+
         return Ok();
     }
 
-    [HttpPost("{userId}")]
+    [HttpPost("to-user/{userId}")]
     public ActionResult AddDeviceToUser(Guid userId, [FromBody] AddDeviceToUserRequest request)
     {
         _devicesService.AddDeviceToUser(userId, request);
@@ -43,25 +49,25 @@ public class DevicesController : Controller
         return Ok();
     }
 
-    [HttpGet()]
-    public ActionResult<List<DeviceDto>> GetDevice([FromQuery] Guid? id, [FromQuery] Guid? userId)
-    {
-        if (userId is not null)
-        {
-            return Ok(_devicesService.GetDeviceById((Guid)userId));
-        }
+    // [HttpGet()]
+    // public ActionResult<List<DeviceDto>> GetDevice([FromQuery] Guid? id, [FromQuery] Guid? userId)
+    // {
+    //     if (userId is not null)
+    //     {
+    //         return Ok(_devicesService.GetDeviceById((Guid)userId));
+    //     }
+    //
+    //     if (id is not null)
+    //     {
+    //         return Ok(_devicesService.GetDeviceById((Guid)id));
+    //     }
+    //
+    //     return Ok(new List<DeviceDto>());
+    // }
 
-        if (id is not null)
-        {
-            return Ok(_devicesService.GetDeviceById((Guid)id));
-        }
-
-        return Ok(new List<DeviceDto>());
-    }
-
-    [HttpGet("by-user/{userId}")]
-    public DeviceDto GetDeviceByUserId(Guid id)
-    {
-        return _devicesService.GetDeviceByUserId(Guid.NewGuid());
-    }
+    // [HttpGet("by-user/{userId}")]
+    // public DeviceDto GetDeviceByUserId(Guid id)
+    // {
+    //     return _devicesService.GetDeviceByUserId(Guid.NewGuid());
+    // }
 }

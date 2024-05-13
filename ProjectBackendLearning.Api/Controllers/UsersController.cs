@@ -22,7 +22,7 @@ public class UsersController : Controller
         _devicesService = devicesService;
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpGet("getUsers")]
     public ActionResult<List<UserDto>> GetUsers()
     {
