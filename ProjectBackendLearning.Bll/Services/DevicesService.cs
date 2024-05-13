@@ -34,11 +34,9 @@ public class DevicesService : IDevicesService
         if ((int)request.DeviceType > enumCount) throw new ValidationException($"передан неверный тип устройства");
 
         DeviceDto device = _mapper.Map<DeviceDto>(request);
-        //device.Id = Guid.NewGuid();
+        
         device.Owner = user;
-        // if (user.Devices == null) user.Devices = new List<DeviceDto>();
-        // user.Devices.Add(device);
-        // _usersRepository.UpdateUser(user);
+
         _devicesRepository.AddDeviceToUser(device);
     }
 
