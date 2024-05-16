@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.Core", "ProjectBackendLearning.Core\ProjectBackendLearning.Core.csproj", "{DB54B628-60B9-4D77-BE6C-22E5C181A194}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.Bll.Tests", "ProjectBackendLearning.Bll.Tests\ProjectBackendLearning.Bll.Tests.csproj", "{75624973-B169-42F5-8DDB-A5380692DE7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.DataLayer.Tests", "ProjectBackendLearning.DataLayer.Tests\ProjectBackendLearning.DataLayer.Tests.csproj", "{379F4C11-E953-4123-B51E-9BCC24BA3B46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{DB54B628-60B9-4D77-BE6C-22E5C181A194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB54B628-60B9-4D77-BE6C-22E5C181A194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB54B628-60B9-4D77-BE6C-22E5C181A194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75624973-B169-42F5-8DDB-A5380692DE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75624973-B169-42F5-8DDB-A5380692DE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75624973-B169-42F5-8DDB-A5380692DE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75624973-B169-42F5-8DDB-A5380692DE7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

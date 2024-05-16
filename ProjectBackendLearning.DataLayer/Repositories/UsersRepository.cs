@@ -46,7 +46,8 @@ public class UsersRepository : BaseRepository, IUsersRepository
     {
         _logger.Information("Идем в базу данных запрашивать список всех пользователей");
         
-        return _ctx.Users.ToList();
+        var users= _ctx.Users.ToList();
+        return users;
     }
 
     public UserDto GetUserById(Guid id)

@@ -10,4 +10,6 @@ public interface IDevicesRepository
     DeviceDto GetDeviceByUserId(Guid userId);
     public void AddDeviceToUser(DeviceDto device);
     public void SetDeviceStatus(DeviceDto device);
+    public List<DeviceDto> GetDevicesWhereStatusIsNotNull();
+
 }

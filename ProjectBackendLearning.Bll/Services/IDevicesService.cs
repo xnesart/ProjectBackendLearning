@@ -9,4 +9,6 @@ public interface IDevicesService
     DeviceDto GetDeviceByUserId(Guid userId);
     void AddDeviceToUser(Guid id, AddDeviceToUserRequest request);
     void SetDeviceStatus(Guid deviceId, bool value);
+    List<DeviceDto> GetDevicesWithStatus();
+
 }

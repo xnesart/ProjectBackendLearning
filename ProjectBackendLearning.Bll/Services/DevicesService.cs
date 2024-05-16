@@ -10,13 +10,15 @@ namespace ProjectBackendLearning.Bll.Services;
 public class DevicesService : IDevicesService
 {
     private readonly IDevicesRepository _devicesRepository;
+    private readonly IUsersRepository _usersRepository;
     private readonly IUsersService _usersService;
     private readonly IMapper _mapper;
 
-    public DevicesService(IMapper mapper, IDevicesRepository devicesRepository, IUsersService usersService)
+    public DevicesService(IMapper mapper, IDevicesRepository devicesRepository, IUsersService usersService,IUsersRepository usersRepository)
     {
         _devicesRepository = devicesRepository;
         _usersService = usersService;
+        _usersRepository = usersRepository;
         _mapper = mapper;
     }
 
@@ -32,7 +34,7 @@ public class DevicesService : IDevicesService
         if ((int)request.DeviceType > enumCount) throw new ValidationException($"передан неверный тип устройства");
 
         DeviceDto device = _mapper.Map<DeviceDto>(request);
-        device.Id = Guid.NewGuid();
+        
         device.Owner = user;
 
         _devicesRepository.AddDeviceToUser(device);
@@ -44,7 +46,12 @@ public class DevicesService : IDevicesService
         if (device is null) throw new NotFoundException($"девайс с id {deviceId} не найден");
 
         device.Status = value;
-        
+
         _devicesRepository.SetDeviceStatus(device);
+    }
+
+    public List<DeviceDto> GetDevicesWithStatus()
+    {
+        return _devicesRepository.GetDevicesWhereStatusIsNotNull();
     }
 }
