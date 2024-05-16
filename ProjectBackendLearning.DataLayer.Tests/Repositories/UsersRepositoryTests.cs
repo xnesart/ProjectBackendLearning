@@ -20,20 +20,41 @@ public class UsersRepositoryTests
     {
         //arrange
         var user = new UserDto { UserName = "testUser" };
-        var userId = Guid.NewGuid();
+        var mockUsers = new List<UserDto>() { new UserDto() { Id = Guid.NewGuid() } };
+
+        _ctxMock = new Mock<BackMinerContext>();
+        _ctxMock.Setup<DbSet<UserDto>>(x => x.Users)
+            .ReturnsDbSet(mockUsers);
+        _ctxMock.Setup(x => x.SaveChanges()).Verifiable();
+        
+        var _sut = new UsersRepository(_ctxMock.Object);
+        
+        //act
+       _sut.CreateUser(user);
+
+        //assert
+        Assert.Equal(1, this._ctxMock.Object.Users.Count());
+        _ctxMock.Verify(x => x.SaveChanges(), Times.Once);
+
+    }   
+    
+    [Fact]
+    public void DeleteUser_ValidUserDtoSent_NoErrorsReceived()
+    {
+        // Arrange
+        var user = new UserDto { UserName = "testUser" };
+        var mockUsers = new List<UserDto>() { user };
 
         var _ctxMock = new Mock<BackMinerContext>();
         _ctxMock.Setup<DbSet<UserDto>>(x => x.Users)
-            .ReturnsDbSet(new List<UserDto>() { new UserDto() { Age = 20 } });
-        _ctxMock.Setup(x => x.SaveChanges()).Verifiable();
+            .ReturnsDbSet(mockUsers);
 
         var _sut = new UsersRepository(_ctxMock.Object);
 
+        // Act
+        _sut.DeleteUser(user);
 
-        //act
-        var actual = _sut.CreateUser(user);
-
-        //assert
-        Assert.Equal(actual, userId);
+        // Assert
+        _ctxMock.Verify(x => x.SaveChanges(), Times.Once);
     }
 }

@@ -5,11 +5,16 @@ namespace ProjectBackendLearning.DataLayer;
 
 public class BackMinerContext : DbContext
 {
-    public DbSet<UserDto> Users { get; set; }
-    public DbSet<DeviceDto> Devices { get; set; }
+    public virtual DbSet<UserDto> Users { get; set; }
+    public virtual DbSet<DeviceDto> Devices { get; set; }
 
     public BackMinerContext(DbContextOptions<BackMinerContext> options) : base(options)
     {
+    }
+
+    public BackMinerContext()
+    {
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
