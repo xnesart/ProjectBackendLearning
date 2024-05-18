@@ -37,7 +37,7 @@ public class UsersServiceTests
         var expectedGuid = Guid.NewGuid();
         _userRepositoryMock.Setup(repo => repo.CreateUser(It.IsAny<UserDto>())).Returns(expectedGuid);
 
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
         var request = new CreateUserRequest()
         {
             Age = 20,
@@ -47,7 +47,7 @@ public class UsersServiceTests
         };
 
         //act
-        var actual = sut.CreateUser(request);
+        var actual = _sut.CreateUser(request);
 
         //assert
         Assert.Equal(expectedGuid, actual);
@@ -65,7 +65,7 @@ public class UsersServiceTests
         var expectedGuid = Guid.NewGuid();
         _userRepositoryMock.Setup(repo => repo.CreateUser(It.IsAny<UserDto>())).Returns(expectedGuid);
 
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
         var invalidRequest = new CreateUserRequest()
         {
             Age = 20,
@@ -75,7 +75,7 @@ public class UsersServiceTests
         };
 
         //act, assert
-        Assert.Throws<ValidationException>(() => sut.CreateUser(invalidRequest));
+        Assert.Throws<ValidationException>(() => _sut.CreateUser(invalidRequest));
         _userRepositoryMock.Verify(x => x.CreateUser(It.IsAny<UserDto>()), Times.Never());
     }
     
@@ -90,7 +90,7 @@ public class UsersServiceTests
         var expectedGuid = Guid.NewGuid();
         _userRepositoryMock.Setup(repo => repo.CreateUser(It.IsAny<UserDto>())).Returns(expectedGuid);
 
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
         var invalidRequest = new CreateUserRequest()
         {
             Age = age,
@@ -100,7 +100,7 @@ public class UsersServiceTests
         };
 
         //act, assert
-        Assert.Throws<ValidationException>(() => sut.CreateUser(invalidRequest));
+        Assert.Throws<ValidationException>(() => _sut.CreateUser(invalidRequest));
         _userRepositoryMock.Verify(x => x.CreateUser(It.IsAny<UserDto>()), Times.Never());
     }
     
@@ -114,11 +114,11 @@ public class UsersServiceTests
         };
         _userRepositoryMock.Setup(repo => repo.GetUsers()).Returns(expectedList);
 
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
         
 
         //act
-        var actual = sut.GetUsers();
+        var actual = _sut.GetUsers();
 
         //assert
         Assert.Equal(expectedList, actual);
@@ -139,10 +139,10 @@ public class UsersServiceTests
         };
        
         _userRepositoryMock.Setup(repo => repo.GetUserById(It.IsAny<Guid>())).Returns(expectedDto);
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
 
         //act
-        var actual = sut.GetUserById(guid);
+        var actual = _sut.GetUserById(guid);
 
         //assert
         Assert.Equal(expectedDto, actual);
@@ -163,10 +163,10 @@ public class UsersServiceTests
         };
        
         _userRepositoryMock.Setup(repo => repo.GetUserById(It.IsAny<Guid>())).Returns(userDto);
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
 
         //act
-        sut.DeleteUserById(guid);
+        _sut.DeleteUserById(guid);
 
         //assert
         _userRepositoryMock.Verify(x => x.DeleteUser(userDto), Times.Once());
@@ -186,10 +186,10 @@ public class UsersServiceTests
         };
        
         _userRepositoryMock.Setup(repo => repo.GetUserById(It.IsAny<Guid>())).Returns((UserDto)null);
-        var sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
+        _sut = new UsersService(_userRepositoryMock.Object, _mapper, _userValidator, _userUpdateValidator);
 
         //act, assert
-        Assert.Throws<NotFoundException>(() => sut.DeleteUserById(guid));
+        Assert.Throws<NotFoundException>(() => _sut.DeleteUserById(guid));
         _userRepositoryMock.Verify(x => x.GetUserById(guid), Times.Once());
         _userRepositoryMock.Verify(x => x.DeleteUser(userDto), Times.Never());
     }

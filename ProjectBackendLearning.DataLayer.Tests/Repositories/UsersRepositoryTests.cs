@@ -26,18 +26,17 @@ public class UsersRepositoryTests
         _ctxMock.Setup<DbSet<UserDto>>(x => x.Users)
             .ReturnsDbSet(mockUsers);
         _ctxMock.Setup(x => x.SaveChanges()).Verifiable();
-        
-        var _sut = new UsersRepository(_ctxMock.Object);
-        
+
+        _sut = new UsersRepository(_ctxMock.Object);
+
         //act
-       _sut.CreateUser(user);
+        _sut.CreateUser(user);
 
         //assert
         Assert.Equal(1, this._ctxMock.Object.Users.Count());
         _ctxMock.Verify(x => x.SaveChanges(), Times.Once);
+    }
 
-    }   
-    
     [Fact]
     public void DeleteUser_ValidUserDtoSent_NoErrorsReceived()
     {
@@ -49,7 +48,7 @@ public class UsersRepositoryTests
         _ctxMock.Setup<DbSet<UserDto>>(x => x.Users)
             .ReturnsDbSet(mockUsers);
 
-        var _sut = new UsersRepository(_ctxMock.Object);
+        _sut = new UsersRepository(_ctxMock.Object);
 
         // Act
         _sut.DeleteUser(user);

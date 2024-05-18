@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.Bll.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.DataLayer.Tests", "ProjectBackendLearning.DataLayer.Tests\ProjectBackendLearning.DataLayer.Tests.csproj", "{379F4C11-E953-4123-B51E-9BCC24BA3B46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBackendLearning.Api.Tests", "ProjectBackendLearning.Api.Tests\ProjectBackendLearning.Api.Tests.csproj", "{C4ED73E9-1284-4DED-BA51-220625DCA9EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{379F4C11-E953-4123-B51E-9BCC24BA3B46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4ED73E9-1284-4DED-BA51-220625DCA9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4ED73E9-1284-4DED-BA51-220625DCA9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4ED73E9-1284-4DED-BA51-220625DCA9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4ED73E9-1284-4DED-BA51-220625DCA9EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

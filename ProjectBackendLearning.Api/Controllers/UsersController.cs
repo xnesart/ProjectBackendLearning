@@ -31,22 +31,22 @@ public class UsersController : Controller
         return Ok(_usersService.GetUsers());
     }
 
-    [HttpGet("{id}")]
-    public ActionResult<UserResponse> GetUserById(Guid id)
-    {
-        _logger.Information($"Получаем пользователя по id {id}");
-
-        var user = _usersService.GetUserById(id);
-        UserResponse userForReturn = new UserResponse()
-        {
-            Id = user.Id,
-            Age = user.Age,
-            Email = user.Email,
-            UserName = user.UserName
-        };
-        
-        return Ok(userForReturn);
-    }
+    // [HttpGet("{id}")]
+    // public ActionResult<UserResponse> GetUserById(Guid id)
+    // {
+    //     _logger.Information($"Получаем пользователя по id {id}");
+    //
+    //     var user = _usersService.GetUserById(id);
+    //     UserResponse userForReturn = new UserResponse()
+    //     {
+    //         Id = user.Id,
+    //         Age = user.Age,
+    //         Email = user.Email,
+    //         UserName = user.UserName
+    //     };
+    //     
+    //     return Ok(userForReturn);
+    // }
 
     [HttpPost("create")]
     public ActionResult<Guid> CreateUser([FromBody] CreateUserRequest request)
@@ -85,7 +85,7 @@ public class UsersController : Controller
     {
         _usersService.DeleteUserById(id);
 
-        return Ok();
+        return NotFound();
     }
 
     [HttpGet("{userId}/devices")]
