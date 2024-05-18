@@ -66,8 +66,8 @@ public class DevicesController : Controller
     // }
 
     // [HttpGet("by-user/{userId}")]
-    // public DeviceDto GetDeviceByUserId(Guid id)
+    // public DeviceDto GetDevicesByUserId(Guid id)
     // {
-    //     return _devicesService.GetDeviceByUserId(Guid.NewGuid());
+    //     return _devicesService.GetDevicesByUserId(Guid.NewGuid());
     // }
 }

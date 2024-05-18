@@ -43,7 +43,7 @@ public class UsersControllerTests
     }
 
     [Fact]
-    public void CreateUser_CorrectRequestSent_GuidReturned()
+    public void CreateUser_CorrectRequestSent_GuidReceived()
     {
         //arrange
         var expected = Guid.NewGuid();
@@ -111,5 +111,26 @@ public class UsersControllerTests
         // Assert
         Assert.IsType<NotFoundResult>(result);
         _usersMockService.Verify(service => service.DeleteUserById(userId), Times.Once);
+    }    
+    
+    [Fact]
+    public void GetDevicesByUserId_CorrectGuidSent_DevicesReceived()
+    {
+        //arrange
+        var userId = Guid.NewGuid();
+        var expectedDevices = new List<DeviceDto>
+        {
+            new DeviceDto(){Address = "address"}
+        };
+        _devicesMockService.Setup(service => service.GetDevicesByUserId(userId)).Returns(expectedDevices);
+
+        //act
+        var result = _sut.GetDevicesByUserId(userId);
+
+        //assert
+        var okResult = Assert.IsType<OkObjectResult>(result.Result);
+        var returnValue = Assert.IsType<List<DeviceDto>>(okResult.Value);
+        Assert.Equal(expectedDevices.Count, returnValue.Count);
+        _devicesMockService.Verify(x => x.GetDevicesByUserId(userId), Times.Once);
     }
 }

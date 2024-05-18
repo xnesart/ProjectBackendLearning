@@ -7,7 +7,7 @@ namespace ProjectBackendLearning.DataLayer.Repositories;
 public interface IDevicesRepository
 {
     DeviceDto GetDeviceById(Guid id);
-    DeviceDto GetDeviceByUserId(Guid userId);
+    List<DeviceDto> GetDevicesByUserId(Guid userId);
     public void AddDeviceToUser(DeviceDto device);
     public void SetDeviceStatus(DeviceDto device);
     public List<DeviceDto> GetDevicesWhereStatusIsNotNull();

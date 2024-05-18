@@ -21,7 +21,7 @@ public class DevicesRepository : BaseRepository, IDevicesRepository
         _ctx.SaveChanges();
     }
     public DeviceDto GetDeviceById(Guid id) => _ctx.Devices.Include(u=>u.Owner).FirstOrDefault(d => d.Id == id);
-    public DeviceDto GetDeviceByUserId(Guid userId) => _ctx.Devices.FirstOrDefault(d => d.Owner.Id == userId);
+    public List<DeviceDto> GetDevicesByUserId(Guid userId) => _ctx.Devices.Where(d => d.Owner.Id == userId).ToList();
 
     public List<DeviceDto> GetDevicesWhereStatusIsNotNull()
     {

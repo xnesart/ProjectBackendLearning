@@ -51,7 +51,7 @@ public class UsersController : Controller
     [HttpPost("create")]
     public ActionResult<Guid> CreateUser([FromBody] CreateUserRequest request)
     {
-        _logger.Debug($"Запрос создать пользователя с параметрами: {request.UserName} {request.Age} {request.Email}");
+        _logger.Information($"Запрос создать пользователя с параметрами: {request.UserName} {request.Age} {request.Email}");
 
         return Ok(_usersService.CreateUser(request));
     }
@@ -59,7 +59,7 @@ public class UsersController : Controller
     [HttpPost("login")]
     public ActionResult<AuthenticationResponse> Login([FromBody] LoginUserRequest request)
     {
-        _logger.Debug($"Запрос авторизации пользователя с параметрами: {request.UserName}");
+        _logger.Information($"Запрос авторизации пользователя с параметрами: {request.UserName}");
 
         if (request is null)
         {
@@ -89,8 +89,8 @@ public class UsersController : Controller
     }
 
     [HttpGet("{userId}/devices")]
-    public DeviceDto GetDeviceByUserId(Guid userId)
+    public ActionResult<List<DeviceDto>> GetDevicesByUserId(Guid userId)
     {
-        return _devicesService.GetDeviceByUserId(Guid.NewGuid());
+        return Ok(_devicesService.GetDevicesByUserId(userId));
     }
 }

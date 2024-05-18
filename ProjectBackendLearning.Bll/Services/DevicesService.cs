@@ -23,7 +23,7 @@ public class DevicesService : IDevicesService
     }
 
     public DeviceDto GetDeviceById(Guid id) => _devicesRepository.GetDeviceById(id);
-    public DeviceDto GetDeviceByUserId(Guid userId) => _devicesRepository.GetDeviceByUserId(userId);
+    public List<DeviceDto> GetDevicesByUserId(Guid userId) => _devicesRepository.GetDevicesByUserId(userId);
 
     public void AddDeviceToUser(Guid id, AddDeviceToUserRequest request)
     {
